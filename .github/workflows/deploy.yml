@@ -3,20 +3,20 @@ name: Build and Deploy Container
 on:
   push:
     branches:
-      - main  # Change to your default branch name if different
+      - main  # Make sure this matches your default branch name (main or master)
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     
     steps:
-    - name: Checkout code
+    - name: Checkout Code
       uses: actions/checkout@v4
 
     - name: Log in to Azure Container Registry
       uses: azure/docker-login@v2
       with:
-        login-server: ${{ secrets.REGISTRY_URL }} # e.g., yourregistry.azurecr.io
+        login-server: ${{ secrets.REGISTRY_URL }}
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
 
@@ -25,13 +25,9 @@ jobs:
         docker build -t ${{ secrets.REGISTRY_URL }}/student-performance-prediction:latest .
         docker push ${{ secrets.REGISTRY_URL }}/student-performance-prediction:latest
 
-    - name: Log in to Azure
-      uses: azure/login@v2
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-    - name: Deploy to Azure Web App
+    - name: Deploy Container to Azure Web App
       uses: azure/webapps-deploy@v3
       with:
         app-name: 'student-performance-prediction'
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
         images: '${{ secrets.REGISTRY_URL }}/student-performance-prediction:latest'
