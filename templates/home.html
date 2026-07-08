@@ -9,210 +9,139 @@
 <title>Student Performance Prediction | End-to-End ML Project</title>
 <link rel="icon" href="{{ url_for('static', filename='favicon.png') }}">
 <style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Segoe UI',sans-serif;
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
 }
 
-body{
-
-background:linear-gradient(135deg,#4facfe,#00f2fe);
-
-min-height:100vh;
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-padding:40px;
-
+body {
+    background: linear-gradient(135deg, #4facfe, #00f2fe);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
 }
 
-.login{
-
-width:100%;
-
-max-width:900px;
-
-background:rgba(255,255,255,.15);
-
-backdrop-filter:blur(15px);
-
-padding:40px;
-
-border-radius:20px;
-
-box-shadow:0 20px 45px rgba(0,0,0,.25);
-
-border:1px solid rgba(255,255,255,.3);
-
+.login {
+    width: 100%;
+    max-width: 900px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-h1{
-
-text-align:center;
-
-color:white;
-
-margin-bottom:30px;
-
-font-size:34px;
-
+h1 {
+    text-align: center;
+    color: white;
+    margin-bottom: 30px;
+    font-size: 34px;
 }
 
-legend{
-
-text-align:center;
-
-font-size:24px;
-
-font-weight:bold;
-
-margin-bottom:30px;
-
-color:white;
-
+legend {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    color: white;
 }
 
-form{
-
-display:grid;
-
-grid-template-columns:1fr 1fr;
-
-gap:20px;
-
+form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
 }
 
-.mb-3{
-
-display:flex;
-
-flex-direction:column;
-
+.mb-3 {
+    display: flex;
+    flex-direction: column;
 }
 
-label{
-
-margin-bottom:8px;
-
-font-weight:600;
-
-color:white;
-
+label {
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: white;
 }
 
-.form-control{
-
-padding:13px;
-
-border:none;
-
-border-radius:10px;
-
-font-size:15px;
-
-outline:none;
-
-transition:.3s;
-
+.form-control {
+    padding: 13px;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    outline: none;
+    transition: 0.3s;
 }
 
-.form-control:focus{
-
-transform:scale(1.02);
-
-box-shadow:0 0 15px rgba(255,255,255,.5);
-
+.form-control:focus {
+    transform: scale(1.02);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
 }
 
-.btn{
-
-grid-column:span 2;
-
-padding:15px;
-
-font-size:18px;
-
-font-weight:bold;
-
-border:none;
-
-border-radius:12px;
-
-background:white;
-
-color:#0077ff;
-
-cursor:pointer;
-
-transition:.3s;
-
+.button-container {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
 }
 
-.btn:hover{
-
-background:#0077ff;
-
-color:white;
-
-transform:translateY(-3px);
-
+.btn {
+    width: 100%;
+    max-width: 400px;
+    padding: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 12px;
+    background: white;
+    color: #0077ff;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
-.result{
-
-margin-top:30px;
-
-background:white;
-
-padding:18px;
-
-border-radius:12px;
-
-text-align:center;
-
-font-size:24px;
-
-font-weight:bold;
-
-color:#0077ff;
-
+.btn:hover {
+    background: #0077ff;
+    color: white;
+    transform: translateY(-3px);
 }
 
-@media(max-width:768px){
-
-form{
-
-grid-template-columns:1fr;
-
+.result {
+    margin-top: 30px;
+    background: white;
+    padding: 18px;
+    border-radius: 12px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #0077ff;
 }
 
-.btn{
+@media (max-width: 768px) {
 
-grid-column:span 1;
+    form {
+        grid-template-columns: 1fr;
+    }
 
+    .login {
+        padding: 25px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    .button-container {
+        justify-content: stretch;
+    }
+
+    .btn {
+        max-width: 100%;
+    }
 }
-
-.login{
-
-padding:25px;
-
-}
-
-h1{
-
-font-size:28px;
-
-}
-
-}
-
 </style>
 
 </head>
@@ -314,16 +243,17 @@ font-size:28px;
             <input class="form-control" type="number" name="reading_score"
                 placeholder="Enter your Reading Score" min='0' max='100' />
         </div>
-        <div class="mb-3">
-            <input class="btn btn-primary" type="submit" value="Predict Student Performance" required />
+        <div class="mb-3"></div>
+        <div class="button-container">
+            <input class="btn" type="submit" value="Predict Student Performance">
         </div>
     </form>
-    {% if results is not none %}
-        <div class="result">
-            <h2>🎯 Predicted Maths Score</h2>
-            <br>
-            {{ "%.2f"|format(results) }}/100
-        </div>
+    {% if results %}
+    <div class="result">
+        <h2>🎯 Predicted Maths Score</h2>
+        <br>
+        {{ "%.2f"|format(results) }}/100
+    </div>
     {% endif %}
    <body>
 </html>
