@@ -306,26 +306,24 @@ font-size:28px;
         </div>
         <div class="mb-3">
             <label class="form-label">Writing Score out of 100</label>
-            <input class="form-control" type="number" name="reading_score"
-                placeholder="Enter your Reading score" min='0' max='100' />
+            <input class="form-control" type="number" name="writing_score"
+                placeholder="Enter your Writing score" min='0' max='100' />
         </div>
         <div class="mb-3">
             <label class="form-label">Reading Score out of 100</label>
-            <input class="form-control" type="number" name="writing_score"
+            <input class="form-control" type="number" name="reading_score"
                 placeholder="Enter your Reading Score" min='0' max='100' />
         </div>
         <div class="mb-3">
             <input class="btn btn-primary" type="submit" value="Predict Student Performance" required />
         </div>
     </form>
-    <div class="result">
-
-🎯 Predicted Maths Score
-
-<br><br>
-
-{{ results }}
-
-</div>
+    {% if results is not none %}
+        <div class="result">
+            <h2>🎯 Predicted Maths Score</h2>
+            <br>
+            {{ "%.2f"|format(results) }}/100
+        </div>
+    {% endif %}
    <body>
 </html>
